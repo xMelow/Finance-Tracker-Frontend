@@ -2,10 +2,12 @@ import { Expense } from "../types/expense";
 import styles from '../styles/expenseList.module.css';
 
 interface ExpenseListProps {
-    expenses: Expense[]
+    expenses: Expense[],
+    categories: Record<number, string>,
 }
 
-const ExpenseList: React.FC<ExpenseListProps> = ({ expenses }) => {
+const ExpenseList: React.FC<ExpenseListProps> = ({ expenses, categories }) => {
+    console.log(expenses);
     return ( 
         <div className={styles.container}>
             <h2 className={styles.title}>Expenses</h2>
@@ -15,17 +17,12 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ expenses }) => {
                 <ul className={styles.list}>
                 {expenses.map((ex) => (
                     <li key={ex.id} className={styles.item}>
-                    <div className={styles.row}>
-                        <span>{ex.description}</span>
-                        <span
-                        className={
-                            ex.amount < 0 ? styles.amountNegative : styles.amountPositive
-                        }
-                        >
-                        {ex.amount}€
-                        </span>
-                    </div>
-                    <div className={styles.category}>{ex.category}</div>
+                    <article className={styles.row}>
+                        <h2>{ex.description}</h2>
+                        <p className={styles.category}>{categories[ex.categoryId] ?? 'Unknown'}</p>
+                        <p className={styles.amountPositive}>€ {ex.amount}</p>
+                        <p>{ex.date.toString()}</p>
+                    </article>
                     </li>
                 ))}
                 </ul>
