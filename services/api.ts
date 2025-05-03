@@ -24,8 +24,6 @@ export async function addExpense(expense: {
     });
 
     if (!response.ok) { throw new Error("Failed to add Expense") }
-
-    return await response.json();
 }
 
 export async function getCategories(): Promise<Category[]> {
@@ -37,7 +35,7 @@ export async function getCategories(): Promise<Category[]> {
 }
 
 export async function getCategoryByName(name: string): Promise<Category> {
-    const response = await fetch(`${API_URL}/category/${name}`);
+    const response = await fetch(`${API_URL}/category/name/${name}`);
 
     if (!response.ok) { throw new Error("Failed to fetch Category name"); }
 
