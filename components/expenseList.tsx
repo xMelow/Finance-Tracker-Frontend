@@ -7,10 +7,9 @@ interface ExpenseListProps {
 }
 
 const ExpenseList: React.FC<ExpenseListProps> = ({ expenses, categories }) => {
-    console.log(expenses);
     return ( 
         <div className={styles.container}>
-            <h2 className={styles.title}>Expenses</h2>
+            {/* <h2 className={styles.title}>Expenses</h2> */}
             {expenses.length === 0 ? (
                 <p className={styles.noExpenses}>No expenses found.</p>
             ) : (
