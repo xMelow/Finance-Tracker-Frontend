@@ -28,6 +28,16 @@ export async function addExpense(expense: {
     return await response.json();
 }
 
+export async function deleteExpense(id: number): Promise<Expense> {
+    const response = await fetch(`${API_URL}/expenses/${id}`, {
+        method: "DELETE",
+    });
+
+    if (!response.ok) { throw new Error("Failed to delete Expense"); }
+
+    return await response.json();
+}
+
 export async function getCategories(): Promise<Category[]> {
     const response = await fetch(`${API_URL}/category`);
 

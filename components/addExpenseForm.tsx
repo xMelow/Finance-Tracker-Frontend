@@ -3,12 +3,12 @@ import { addExpense, getCategories, getCategoryByName } from "../services/api";
 import { Category } from "../types/category";
 import { Expense } from "../types/expense";
 
-type Props = {
+interface AddExpenseFormProps {
     categories: Category[];
     onAddExpense: (expense: Expense) => void;
 }
 
-export default function AddExpenseForm({ categories, onAddExpense }: Props) {
+export default function AddExpenseForm({ categories, onAddExpense }: AddExpenseFormProps) {
     const [description, setDescription] = useState("");
     const [amount, setAmount] = useState("");
     const [category, setCategory] = useState("");
