@@ -16,7 +16,7 @@ export async function addExpense(expense: {
     categoryId: number;
     description: string;
     date: string;
-}): Promise<void> {
+}): Promise<Expense> {
     const response = await fetch(`${API_URL}/expenses`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -24,6 +24,8 @@ export async function addExpense(expense: {
     });
 
     if (!response.ok) { throw new Error("Failed to add Expense") }
+
+    return await response.json();
 }
 
 export async function getCategories(): Promise<Category[]> {

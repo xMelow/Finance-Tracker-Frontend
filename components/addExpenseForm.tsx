@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { addExpense, getCategories, getCategoryByName } from "../services/api";
 import { Category } from "../types/category";
+import { Expense } from "../types/expense";
 
 type Props = {
     categories: Category[];
+    onAddExpense: (expense: Expense) => void;
 }
 
-export default function AddExpenseForm({ categories }: Props) {
+export default function AddExpenseForm({ categories, onAddExpense }: Props) {
     const [description, setDescription] = useState("");
     const [amount, setAmount] = useState("");
     const [category, setCategory] = useState("");
@@ -16,13 +18,13 @@ export default function AddExpenseForm({ categories }: Props) {
         e.preventDefault();
         const categoryId = (await getCategoryByName(category)).id;
         try {
-            await addExpense({
+            const newExpense = await addExpense({
                 amount: parseFloat(amount),
                 categoryId: categoryId,
                 description,
                 date,
             });
-            alert("Expense Added!"); // change to pop-up
+            onAddExpense(newExpense);
             setAmount("");
             setCategory("");
             setDescription

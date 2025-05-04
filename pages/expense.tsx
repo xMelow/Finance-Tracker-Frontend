@@ -32,7 +32,7 @@ export default function Home() {
 
             <div>
               <h1>Add Expense</h1>
-              <AddExpenseForm categories={categories}></AddExpenseForm>
+              <AddExpenseForm categories={categories} onAddExpense={(newExpense => setExpenses((prev) => [...prev, newExpense]))}></AddExpenseForm>
             </div>
             
         </div>
