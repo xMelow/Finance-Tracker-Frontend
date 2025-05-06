@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { addExpense, getCategories, getCategoryByName } from "../services/api";
+import { useState } from "react";
+import { addExpense, getCategoryByName } from "../services/api";
 import { Category } from "../types/category";
 import { Expense } from "../types/expense";
 
