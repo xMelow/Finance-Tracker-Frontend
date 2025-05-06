@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Expense } from "../types/expense";
 import { getCategories, getExpenses } from "../services/api";
-import ExpenseList from "../components/expenseList";
 import { Category } from "../types/category";
 import AddExpenseForm from "../components/addExpenseForm";
+import ExpenseList from "../components/expenseList";
 
 export default function Home() {
     const [expenses, setExpenses] = useState<Expense[]>([]);

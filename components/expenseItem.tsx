@@ -3,7 +3,8 @@ import { deleteExpense } from "../services/api";
 import { Category } from "../types/category";
 import { Expense } from "../types/expense";
 import { Pencil, Trash2 } from 'lucide-react';
-import EditExpense from "./editExpense";
+import EditExpense from "../components/editExpense";
+
 
 interface ExpenseItemProps {
     expense: Expense;
@@ -14,7 +15,7 @@ export default function ExpenseItem({ expense, categories }: ExpenseItemProps) {
     const [showPopUpEdit, setShowPopUpEdit] = useState(false);
     const categoryName = categories.find((cat) => cat.id === Number(expense.categoryId))?.name ?? "Unknown";
 
-    const onEdit = async (expense: Expense) => {
+    const onEdit = async () => {
         setShowPopUpEdit(true);
     }
 
@@ -42,7 +43,7 @@ export default function ExpenseItem({ expense, categories }: ExpenseItemProps) {
 
                 <div className="d-flex flex-column align-items-center">
                     <button
-                        onClick={() => onEdit(expense)}
+                        onClick={() => onEdit()}
                         className="btn btn-outline-primary btn-sm mb-2"
                         aria-label="Edit Expense"
                     >
