@@ -38,6 +38,23 @@ export async function deleteExpense(id: number): Promise<Expense> {
     return await response.json();
 }
 
+export async function updateExpense(id: number, expense: {
+    amount: number;
+    categoryId: number;
+    description: string;
+    date: string;
+}): Promise<Expense> {
+    const response = await fetch(`${API_URL}/expenses/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(expense),
+    });
+
+    if (!response.ok) { throw new Error("Failed to update Expense") }
+
+    return await response.json();
+}
+
 export async function getCategories(): Promise<Category[]> {
     const response = await fetch(`${API_URL}/category`);
 

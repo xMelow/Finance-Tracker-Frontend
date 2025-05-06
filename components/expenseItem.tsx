@@ -18,6 +18,7 @@ export default function ExpenseItem({ expense, categories }: ExpenseItemProps) {
     const onDelete = async (expenseId: number) => {
         try {
             await deleteExpense(expenseId);
+            alert("deleted expense")
         } catch (error) {
             console.error(error);
         }
