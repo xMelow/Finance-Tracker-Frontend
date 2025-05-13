@@ -1,7 +1,7 @@
-import { Expense } from "../types/expense";
-import { Category } from "../types/category";
+import { Expense } from "../../../types/expense";
+import { Category } from "../../../types/category";
 import { JSX } from "react";
-import ExpenseItem from "../components/expenseItem"
+import ExpenseItem from "../expenseItem/expenseItem";
 
 interface ExpenseListProps {
   expenses: Expense[];

@@ -1,0 +1,22 @@
+.expenseItem {
+  background-color: rgb(201, 201, 201);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  border: 1px solid black;
+}
+
+.expenseItemData {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  justify-content: space-around;
+}
+
+.expenseItemButtons {
+  display: flex;
+  gap: 0.5rem;
+}

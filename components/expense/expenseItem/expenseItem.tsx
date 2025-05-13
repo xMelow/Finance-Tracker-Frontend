@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { deleteExpense } from "../services/api";
-import { Category } from "../types/category";
-import { Expense } from "../types/expense";
 import { Pencil, Trash2 } from 'lucide-react';
-import EditExpense from "../components/editExpense";
+import { deleteExpense } from "../../../services/api";
+import { Expense } from "../../../types/expense";
+import { Category } from "../../../types/category";
+import EditExpense from "../editExpense/editExpense";
+import styles from './expenseItem.module.css'
 
 
 interface ExpenseItemProps {
@@ -30,18 +31,16 @@ export default function ExpenseItem({ expense, categories }: ExpenseItemProps) {
 
     return (
         <>
-            <li className="list-group-item d-flex justify-content-between align-items-start shadow-sm rounded p-3 mb-3">
-                <div>
-                    <h5 className="mb-1">{expense.description}</h5>
+            <div className={styles.expenseItem}>
+                <h2 className="mb-1">{expense.description}</h2>
 
-                    <div className="bg-light p-3 rounded text-muted">
-                        <p>- Amount: € {expense.amount}</p>
-                        <p>- Category: {categoryName}</p>
-                        <p>- Date: {new Date(expense.date).toLocaleDateString()}</p>
-                    </div>
+                <div className={styles.expenseItemData}>
+                    <p>Amount: € {expense.amount}</p>
+                    <p>Category: {categoryName}</p>
+                    <p>Date: {new Date(expense.date).toLocaleDateString()}</p>
                 </div>
-
-                <div className="d-flex flex-column align-items-center">
+                
+                <div className={styles.expenseItemButtons}>
                     <button
                         onClick={() => onEdit()}
                         className="btn btn-outline-primary btn-sm mb-2"
@@ -58,7 +57,7 @@ export default function ExpenseItem({ expense, categories }: ExpenseItemProps) {
                         <Trash2 size={20} />
                     </button>
                 </div>
-            </li>
+            </div>
             {showPopUpEdit && (
                 <EditExpense
                     expense={expense}

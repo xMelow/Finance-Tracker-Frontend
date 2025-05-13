@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { addExpense, getCategoryByName } from "../services/api";
-import { Category } from "../types/category";
-import { Expense } from "../types/expense";
+import { addExpense, getCategoryByName } from "../../../services/api";
+import { Category } from "../../../types/category";
+import { Expense } from "../../../types/expense";
 
 interface AddExpenseFormProps {
     categories: Category[];
