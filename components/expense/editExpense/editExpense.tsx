@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { updateExpense } from "../services/api";
-import { Expense } from "../types/expense";
-import { Category } from "../types/category";
+import { updateExpense } from "../../../services/api";
+import { Expense } from "../../../types/expense";
+import { Category } from "../../../types/category";
 
 interface EditExpenseProps {
     expense: Expense;

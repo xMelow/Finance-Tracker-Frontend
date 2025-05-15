@@ -1,0 +1,29 @@
+
+body {
+    color: white;
+    background-color: rgb(31, 31, 31);
+}
+
+.transactions {
+    background-color: rgb(31, 31, 31);
+}
+
+.transactions h1 {
+    text-align: center;
+    text-decoration: underline;
+    text-underline-offset: 1rem;
+    font-size: 3rem;
+}
+
+.recentTransactions {
+    margin-top: 5rem;
+}
+
+.addTransactions {
+    margin-top: 5rem;
+}
+
+.flexContainer {
+    display: flex;
+    justify-content: space-around;
+}
