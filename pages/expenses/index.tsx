@@ -5,6 +5,7 @@ import { Category } from "../../types/category";
 import AddExpenseForm from "../../components/expense/expenseForm/addExpenseForm";
 import ExpenseList from "../../components/expense/expenseList/expenseList";
 import styles from './expense.module.css'
+import Header from "../../components/main/header/header";
 
 
 export default function Home() {
@@ -23,6 +24,8 @@ export default function Home() {
     }, []);
 
     return (
+      <>
+        <Header></Header>
         <div className={styles.transactions}>
             <h1 className="text-2xl font-bold mb-4">Expenses</h1>
             {error && <p className="text-red-500">{error}</p>}
@@ -40,5 +43,6 @@ export default function Home() {
               </div>
             </div>
         </div>
+      </>
     )
-} 
+}
