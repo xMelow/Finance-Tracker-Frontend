@@ -3,6 +3,8 @@ import { Expense } from '../types/expense';
 
 const API_URL = "http://localhost:8080"
 
+// Expense
+
 export async function getExpenses(): Promise<Expense[]> {
     const response = await fetch(`${API_URL}/expenses`);
 
@@ -55,6 +57,8 @@ export async function updateExpense(id: number, expense: {
     return await response.json();
 }
 
+// Category
+
 export async function getCategories(): Promise<Category[]> {
     const response = await fetch(`${API_URL}/category`);
 
@@ -69,4 +73,14 @@ export async function getCategoryByName(name: string): Promise<Category> {
     if (!response.ok) { throw new Error("Failed to fetch Category name"); }
 
     return await response.json();
+}
+
+// Totals
+
+export async function getTotals(): Promise<string> {
+    const response = await fetch(`${API_URL}/total/overall`);
+
+    if (!response.ok) { throw new Error("Failed to fetch Category"); }
+
+    return await response.json(); 
 }
