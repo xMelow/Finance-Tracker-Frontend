@@ -15,11 +15,7 @@ body {
     font-size: 2.5rem;
 }
 
-.recentTransactions {
-    margin-top: 5rem;
-}
-
-.addTransactions {
+.recentTransactions, .addTransactions, .totals {
     margin-top: 5rem;
 }
 

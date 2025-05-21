@@ -50,7 +50,7 @@ export default function Home() {
                 <AddExpenseForm categories={categories} onAddExpense={(newExpense => setExpenses((prev) => [...prev, newExpense]))}></AddExpenseForm>
               </div>
 
-              <div>
+              <div className={styles.totals}>
                 <h2>Totals</h2>
                 <Totals totalSpending={totalSpending} totalMonthSpending={totalSpendingMonth}></Totals>
               </div>
