@@ -29,10 +29,6 @@ export default function Home() {
       getTotal()
           .then(setTotalSpending)
           .catch((err) => setError("Error fetching totals: " + err.message));
-
-      getTotalMonthSpending()
-          .then(setTotalSpendingMonth)
-          .catch((err) => setError("Error fetching month totals: " + err.message));
         
     }, []);
 
@@ -52,7 +48,7 @@ export default function Home() {
 
               <div className={styles.totals}>
                 <h2>Totals</h2>
-                <Totals totalSpending={totalSpending} totalMonthSpending={totalSpendingMonth}></Totals>
+                <Totals totalSpending={totalSpending}></Totals>
               </div>
 
                <div className={styles.recentTransactions}>

@@ -1,19 +1,14 @@
-import { monthSpending } from "../../types/monthSpending.";
 
 
 interface TotalProps {
     totalSpending: number | undefined;
-    totalMonthSpending: monthSpending[];
 }
 
-export default function Totals({ totalSpending, totalMonthSpending }: TotalProps) {
+export default function Totals({ totalSpending }: TotalProps) {
     return (
         <div>
-            <p>Total Spending {totalSpending}</p>
-
-            {totalMonthSpending.map((month) => (
-                <p key={month.month}>month: {month.month}, Amount: {month.total}</p>
-            ))}
+            <p><strong>Total Spending:</strong> €{totalSpending?.toFixed(2) ?? 'Loading...'}</p>
+            {/* <p><strong>Total Spending this month:</strong> €{totalSpendingMonth?.toFixed(2) ?? 'Loading...'}</p> */}
         </div>
     )
 }

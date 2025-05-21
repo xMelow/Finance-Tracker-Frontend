@@ -1,13 +1,16 @@
-
+body {
+    background-color: rgb(80, 80, 80);
+}
 
 .title {
     font-size: 4rem;
     text-align: center;
+    color: #4ade80;
 }
 
 .nav {
     text-align: center;
-    border-bottom: 1px solid green;
+    border-bottom: 1px solid #4ade80;
 }
 
 .nav li {

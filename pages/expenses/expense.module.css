@@ -1,25 +1,45 @@
-
-body {
-    color: white;
-    background-color: rgb(31, 31, 31);
-}
-
 .transactions {
-    background-color: rgb(31, 31, 31);
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
 }
 
 .transactions h1 {
     text-align: center;
-    text-decoration: underline;
-    text-underline-offset: 1rem;
-    font-size: 2.5rem;
-}
-
-.recentTransactions, .addTransactions, .totals {
-    margin-top: 5rem;
+    margin-bottom: 3rem;
+    color: #4ade80;
 }
 
 .flexContainer {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.addTransactions,
+.recentTransactions,
+.totalsSection {
+  background-color: #2b2b2b;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.addTransactions h2,
+.recentTransactions h2,
+.totalsSection h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+
+.addTransactions {
+    height: 0%;
+    width: 15%;
+}
+
+.recentTransactions {
+    width: 25%;
 }
