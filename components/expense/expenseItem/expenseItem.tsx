@@ -32,7 +32,7 @@ export default function ExpenseItem({ expense, categories }: ExpenseItemProps) {
     return (
         <>
             <div className={styles.expenseItem}>
-                <h2 className="mb-1">{expense.description}</h2>
+                <h2 className={styles.expenseTitle}>{expense.description}</h2>
 
                 <div className={styles.expenseItemData}>
                     <p>Amount: € {expense.amount}</p>
@@ -43,7 +43,7 @@ export default function ExpenseItem({ expense, categories }: ExpenseItemProps) {
                 <div className={styles.expenseItemButtons}>
                     <button
                         onClick={() => onEdit()}
-                        className="btn btn-outline-primary btn-sm mb-2"
+                        className={styles.expenseItemButtonsEdit}
                         aria-label="Edit Expense"
                     >
                         <Pencil size={20} />
@@ -51,7 +51,7 @@ export default function ExpenseItem({ expense, categories }: ExpenseItemProps) {
 
                     <button
                         onClick={() => onDelete(expense.id)}
-                        className="btn btn-outline-danger btn-sm"
+                        className={styles.expenseItemButtonsDelete}
                         aria-label="Delete Expense"
                     >
                         <Trash2 size={20} />
