@@ -8,21 +8,25 @@ interface EditExpenseProps {
     expense: Expense;
     categories: Category[];
     onClose: () => void;
+    onUpdateExpense: (updatedExpense: Expense) => void;
 }
 
-export default function EditExpense({ expense, categories, onClose }: EditExpenseProps) {
+export default function EditExpense({ expense, categories, onClose, onUpdateExpense }: EditExpenseProps) {
     const [description, setDescription] = useState(expense.description);
     const [amount, setAmount] = useState(expense.amount);
     const [categoryId, setCategoryId] = useState(expense.categoryId);
     const [date, setDate] = useState(expense.date);
 
-    const handleSave = async () => {
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
         const updatedExpense = {
+            id: expense.id,
             amount,
             categoryId,
             description,
             date: date.toString(),
         };
+        onUpdateExpense(updatedExpense);
         try {
             await updateExpense(expense.id, updatedExpense);
             onClose();
@@ -33,7 +37,7 @@ export default function EditExpense({ expense, categories, onClose }: EditExpens
 
     return (
         <div>
-            <form className={styles.expenseForm}>
+            <form className={styles.expenseForm} onSubmit={handleSubmit}>
                 <input className={styles.expenseFormAmount} type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value))} placeholder="Amount" />
                 <select className={styles.expenseFormSelect} value={categoryId} onChange={(e) => setCategoryId(Number(e.target.value))} required >
                     <option value="" disabled>Select Category</option>
@@ -43,7 +47,7 @@ export default function EditExpense({ expense, categories, onClose }: EditExpens
                 </select>
                 <input className={styles.expenseFormDescription} value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" />
                 <input className={styles.expenseFormDate} type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
-                <button className={styles.expenseFormSave} onClick={handleSave} >Save</button>
+                <button className={styles.expenseFormSave} type="submit">Save</button>
                 <button className={styles.expenseFormCancel} onClick={onClose}>Cancel</button>
             </form>
         </div>

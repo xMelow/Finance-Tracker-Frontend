@@ -5,17 +5,15 @@ import { Category } from "../../types/category";
 import AddExpenseForm from "../../components/expense/expenseForm/addExpenseForm";
 import ExpenseList from "../../components/expense/expenseList/expenseList";
 import styles from './expense.module.css'
-import Header from "../../components/main/header/header";
-import { monthSpending } from "../../types/monthSpending.";
+import Header from "../../components/header/header";
 import Totals from "../../components/totals/totals";
 
-
-export default function Home() {
+export default function ExpensePage() {
     const [expenses, setExpenses] = useState<Expense[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
-    const [totalSpending, setTotalSpending] = useState<number>();
-    const [totalSpendingMonth, setTotalSpendingMonth] = useState<monthSpending[]>([]);
     const [error, setError] = useState<string | null>(null);
+    const now = new Date();
+    const currentDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 
     useEffect(() => {
       getExpenses()
@@ -25,12 +23,24 @@ export default function Home() {
       getCategories()
         .then(setCategories)
         .catch((err) => setError("Error fetching categories: " + err.message));
-
-      getTotal()
-          .then(setTotalSpending)
-          .catch((err) => setError("Error fetching totals: " + err.message));
-        
     }, []);
+
+    const handleDeleteExpense = (deletedId: number) => {
+        setExpenses((prev) => prev.filter((exp) => exp.id !== deletedId));
+    };
+
+    const handleUpdateExpense = (updatedExpense: Expense) => {
+      setExpenses((prevExpenses) =>
+        prevExpenses.map((expense) =>
+          expense.id === updatedExpense.id ? updatedExpense : expense
+        )
+      );
+    };
+
+    const totalSpending = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+    const totalSpendingMonth = expenses
+      .filter(expense => expense.date.startsWith(currentDate))
+      .reduce((sum, expense) => sum + expense.amount, 0);
 
     return (
       <>
@@ -48,12 +58,12 @@ export default function Home() {
 
               <div className={styles.totals}>
                 <h2>Totals</h2>
-                <Totals totalSpending={totalSpending}></Totals>
+                <Totals totalSpending={totalSpending} totalSpendingMonth={totalSpendingMonth}></Totals>
               </div>
 
                <div className={styles.recentTransactions}>
                 <h2>Recent Expenses</h2>
-                <ExpenseList expenses={expenses} categories={categories}/>
+                <ExpenseList expenses={expenses} categories={categories} onDeleteExpense={handleDeleteExpense} onUpdateSucces={handleUpdateExpense}/>
               </div>
             </div>
         </div>
