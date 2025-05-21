@@ -1,5 +1,6 @@
 import { Category } from '../types/category';
 import { Expense } from '../types/expense';
+import { monthSpending } from '../types/monthSpending.';
 
 const API_URL = "http://localhost:8080"
 
@@ -77,10 +78,20 @@ export async function getCategoryByName(name: string): Promise<Category> {
 
 // Totals
 
-export async function getTotals(): Promise<string> {
+export async function getTotal(): Promise<number> {
     const response = await fetch(`${API_URL}/total/overall`);
 
-    if (!response.ok) { throw new Error("Failed to fetch Category"); }
+    if (!response.ok) { throw new Error("Failed to fetch total spending"); }
+
+    const data = await response.json()
+
+    return data.totalSpending; 
+}
+
+export async function getTotalMonthSpending(): Promise<monthSpending[]> {
+    const response = await fetch(`${API_URL}/total/month`);
+
+    if (!response.ok) { throw new Error("Failed to fetch monthly spending"); }
 
     return await response.json(); 
 }
