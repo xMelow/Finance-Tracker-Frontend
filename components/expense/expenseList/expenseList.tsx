@@ -6,9 +6,11 @@ import ExpenseItem from "../expenseItem/expenseItem";
 interface ExpenseListProps {
   expenses: Expense[];
   categories: Category[];
+  onDeleteExpense: (expenseId: number) => void;
+  onUpdateSucces: (expense: Expense) => void;
 }
 
-export default function ExpenseList({ expenses, categories }: ExpenseListProps): JSX.Element {
+export default function ExpenseList({ expenses, categories, onDeleteExpense, onUpdateSucces }: ExpenseListProps): JSX.Element {
   return (
     <div className="">
       {expenses.length === 0 ? (
@@ -16,7 +18,7 @@ export default function ExpenseList({ expenses, categories }: ExpenseListProps):
       ) : (
         <ul className="">
           {expenses.map((expense) => (
-            <ExpenseItem key={expense.id} expense={expense} categories={categories}></ExpenseItem>
+            <ExpenseItem key={expense.id} expense={expense} categories={categories} onDeleteSucces={onDeleteExpense} onUpdateSucces={onUpdateSucces}></ExpenseItem>
           ))}
         </ul>
       )}

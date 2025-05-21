@@ -10,20 +10,25 @@ import styles from './expenseItem.module.css'
 interface ExpenseItemProps {
     expense: Expense;
     categories: Category[];
+    onDeleteSucces: (expenseId: number) => void;
+    onUpdateSucces: (expense: Expense) => void;
 }
 
-export default function ExpenseItem({ expense, categories }: ExpenseItemProps) {
+export default function ExpenseItem({ expense, categories, onDeleteSucces, onUpdateSucces }: ExpenseItemProps) {
     const [showPopUpEdit, setShowPopUpEdit] = useState(false);
     const categoryName = categories.find((cat) => cat.id === Number(expense.categoryId))?.name ?? "Unknown";
 
     const onEdit = async () => {
         setShowPopUpEdit(true);
+        onUpdateSucces(expense);
     }
 
     const onDelete = async (expenseId: number) => {
         try {
-            await deleteExpense(expenseId);
-            alert("deleted expense")
+            if (confirm("Are you sure you want to delete this expense?")) {
+                await deleteExpense(expenseId);
+                onDeleteSucces(expenseId);
+            }
         } catch (error) {
             console.error(error);
         }
@@ -63,6 +68,7 @@ export default function ExpenseItem({ expense, categories }: ExpenseItemProps) {
                     expense={expense}
                     categories={categories}
                     onClose={() => setShowPopUpEdit(false)}
+                    onUpdateExpense={onUpdateSucces}
                 />
             )}
         </>
