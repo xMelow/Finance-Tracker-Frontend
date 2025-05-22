@@ -20,11 +20,30 @@
 
 .addTransactions,
 .recentTransactions,
-.totalsSection {
+.totals,
+.filter {
   background-color: #2b2b2b;
   padding: 1rem;
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.addTransactions {
+    height: 0%;
+    width: 15%;
+}
+
+.recentTransactions {
+    width: 25%;
+}
+
+.filter {
+  width: 10%;
+  height: 0%;
+}
+
+.totals {
+  height: 0%;
 }
 
 .addTransactions h2,
@@ -35,11 +54,18 @@
   color: #ffffff;
 }
 
-.addTransactions {
-    height: 0%;
-    width: 15%;
+.filter select,
+.filter input {
+  display: block;
+  width: 90%;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #3b3b3b;
+  color: white;
 }
 
-.recentTransactions {
-    width: 25%;
+.filter select {
+  width: 100%;
 }
