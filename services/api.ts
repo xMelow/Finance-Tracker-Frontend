@@ -2,7 +2,7 @@ import { Category } from '../types/category';
 import { Expense } from '../types/expense';
 import { monthSpending } from '../types/monthSpending.';
 
-const API_URL = "http://localhost:8080"
+const API_URL = process.env.API_URL;
 
 // Expense
 
