@@ -2,16 +2,30 @@ import { Category } from '../types/category';
 import { Expense } from '../types/expense';
 import { monthSpending } from '../types/monthSpending.';
 
-const API_URL = process.env.API_URL;
+const API_URL = "http://localhost:8080";
 
 // Expense
 
-export async function getExpenses(): Promise<Expense[]> {
-    const response = await fetch(`${API_URL}/expenses`);
+export async function getExpenses(params?: {
+    categoryId?: string,
+    minAmount?: number,
+    maxAmount?: number,
+    description: string
+}): Promise<Expense[]> {
+    const query = new URLSearchParams();
 
-    if (!response.ok) {  throw new Error("Failed to fetch Expenses"); }
+  if (params) {
+    if (params.categoryId != null) query.append('categoryId', String(params.categoryId));
+    if (params.minAmount != null) query.append('minAmount', String(params.minAmount));
+    if (params.maxAmount != null) query.append('maxAmount', String(params.maxAmount));
+    if (params.description && params.description.trim() !== '') query.append('description', params.description);
+  }
 
-    return await response.json();
+  const response = await fetch(`${API_URL}/expenses?${query.toString()}`);
+
+  if (!response.ok) throw new Error("Failed to fetch expenses");
+
+  return response.json();
 }
 
 export async function addExpense(expense: {
