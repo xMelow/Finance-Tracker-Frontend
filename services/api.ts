@@ -15,7 +15,7 @@ export async function getExpenses(params?: {
     const query = new URLSearchParams();
 
   if (params) {
-    if (params.categoryId != null) query.append('categoryId', String(params.categoryId));
+    if (params.categoryId != null) query.append('category', String(params.categoryId));
     if (params.minAmount != null) query.append('minAmount', String(params.minAmount));
     if (params.maxAmount != null) query.append('maxAmount', String(params.maxAmount));
     if (params.description && params.description.trim() !== '') query.append('description', params.description);

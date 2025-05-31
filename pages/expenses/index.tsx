@@ -87,7 +87,7 @@ export default function ExpensePage() {
                 <input type="number" placeholder="Max Amount" value={maxAmount} onChange={(e) => setMaxAmount(e.target.value === '' ? '' : Number(e.target.value))} />
                 <select value={filterCategory ?? ''} onChange={(e) => {
                     const value = e.target.value;
-                    setFilterCategory(value === '' ? undefined : value);}}>
+                    setFilterCategory(value === '' || value === 'all' ? undefined : value);}}>
                       
                   <option key={0} value="all">All Categories</option>
                   {categories.map((cat) => (
