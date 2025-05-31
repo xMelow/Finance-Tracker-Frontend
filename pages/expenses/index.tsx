@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Expense } from "../../types/expense";
-import { getCategories, getExpenses, getTotal, getTotalMonthSpending } from "../../services/api";
+import { getCategories, getExpenses } from "../../services/api";
 import { Category } from "../../types/category";
 import AddExpenseForm from "../../components/expense/expenseForm/addExpenseForm";
 import ExpenseList from "../../components/expense/expenseList/expenseList";
@@ -12,7 +12,7 @@ export default function ExpensePage() {
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [filterCategory, setFilterCategory] = useState<string>('all');
+  const [filterCategory, setFilterCategory] = useState<string | undefined>(undefined);
   const [minAmount, setMinAmount] = useState<number | ''>('');
   const [maxAmount, setMaxAmount] = useState<number | ''>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -21,14 +21,22 @@ export default function ExpensePage() {
   const currentDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 
   useEffect(() => {
-    getExpenses()
-      .then(setExpenses)
-      .catch((err) => setError("Error fetching expenses: " + err.message));
-
     getCategories()
       .then(setCategories)
       .catch((err) => setError("Error fetching categories: " + err.message));
   }, []);
+
+  useEffect(() => {
+    getExpenses({
+        categoryId: filterCategory,
+        minAmount: minAmount === '' ? undefined : minAmount,
+        maxAmount: maxAmount === '' ? undefined : maxAmount,
+        description: searchTerm
+      })
+        .then(setExpenses)
+        .catch((err) => setError("Error fetching expenses: " + err.message));
+  }, [filterCategory, minAmount, maxAmount, searchTerm]);
+
 
   const handleDeleteExpense = (deletedId: number) => {
       setExpenses((prev) => prev.filter((exp) => exp.id !== deletedId));
@@ -42,20 +50,11 @@ export default function ExpensePage() {
     );
   };
 
+  // change to api call
   const totalSpending = expenses.reduce((sum, expense) => sum + expense.amount, 0);
   const totalSpendingMonth = expenses
     .filter(expense => expense.date.startsWith(currentDate))
     .reduce((sum, expense) => sum + expense.amount, 0);
-
-  const filteredExpenses = expenses.filter((expense) => {
-    const matchesCategory = filterCategory === 'all' || categories.find(cat => cat.id === expense.categoryId)?.name === filterCategory;
-    const matchesMin = minAmount === '' || expense.amount >= minAmount;
-    const matchesMax = maxAmount === '' || expense.amount <= maxAmount;
-    const matchesSearch = expense.description.toLowerCase().includes(searchTerm.toLowerCase());
-
-    return matchesCategory && matchesMin && matchesMax && matchesSearch;
-  });
-
 
   return (
     <>
@@ -78,7 +77,7 @@ export default function ExpensePage() {
 
             <div className={styles.recentTransactions}>
               <h2>Recent Expenses</h2>
-              <ExpenseList expenses={filteredExpenses} categories={categories} onDeleteExpense={handleDeleteExpense} onUpdateSucces={handleUpdateExpense}/>
+              <ExpenseList expenses={expenses} categories={categories} onDeleteExpense={handleDeleteExpense} onUpdateSucces={handleUpdateExpense}/>
             </div>
 
             <div className={styles.filter}>
@@ -86,10 +85,13 @@ export default function ExpensePage() {
               <div>
                 <input type="number" placeholder="Min Amount" value={minAmount} onChange={(e) => setMinAmount(e.target.value === '' ? '' : Number(e.target.value))} />
                 <input type="number" placeholder="Max Amount" value={maxAmount} onChange={(e) => setMaxAmount(e.target.value === '' ? '' : Number(e.target.value))} />
-                <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)}>
-                  <option value="all">All Categories</option>
+                <select value={filterCategory ?? ''} onChange={(e) => {
+                    const value = e.target.value;
+                    setFilterCategory(value === '' || value === 'all' ? undefined : value);}}>
+                      
+                  <option key={0} value="all">All Categories</option>
                   {categories.map((cat) => (
-                    <option key={cat.id} value={cat.name}>{cat.name}</option>
+                    <option key={cat.id} value={String(cat.id)}>{cat.name}</option>
                   ))}
                 </select>
                 <input type="text" placeholder="Description" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
