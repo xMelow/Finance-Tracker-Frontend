@@ -1,0 +1,18 @@
+
+.chartPage {
+    background-color: #1e1e1e;
+    height: 100rem;
+    padding-top: 0.5rem;
+}
+
+.title {
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    text-align: center;
+    color: #4ade80;
+}
+
+.chart {
+    width: 40%;
+    margin-left: 2rem;
+}
