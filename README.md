@@ -35,8 +35,6 @@ npm run lint    # Linting
 
 ## 🗓️ To-Do
 
-- [ ] show the total spending per month in a graph.
-- [ ] show expense data in visual graphs.
 - [ ] login
 - [ ] sign up
 
