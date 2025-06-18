@@ -1,6 +1,7 @@
 
 
 export interface monthSpending {
-    month: number;
+    month: string;
+    monthNumber: number;
     total: number;
 }

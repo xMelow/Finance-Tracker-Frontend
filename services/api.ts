@@ -1,4 +1,5 @@
 import { Category } from '../types/category';
+import { CategorySpending } from '../types/categorySpending';
 import { Expense } from '../types/expense';
 import { monthSpending } from '../types/monthSpending.';
 
@@ -108,4 +109,12 @@ export async function getTotalMonthSpending(): Promise<monthSpending[]> {
     if (!response.ok) { throw new Error("Failed to fetch monthly spending"); }
 
     return await response.json(); 
+}
+
+export async function getTotalCategorySpending(): Promise<CategorySpending[]> {
+    const response = await fetch(`${API_URL}/total/category`);
+
+    if (!response.ok) { throw new Error("Failed to fetch total category spending"); }
+
+    return await response.json();
 }
