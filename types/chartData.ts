@@ -1,4 +1,8 @@
 export interface ChartData {
-    month: number,
+    month: string,
     total: number
 } 
+
+export interface ChartDataPie {
+
+}

@@ -12,7 +12,17 @@
     color: #4ade80;
 }
 
-.chart {
-    width: 40%;
-    margin-left: 2rem;
+.flexContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.chartBar {
+    width: 50%;
+}
+
+.chartPie {
+    width: 25%;
 }
